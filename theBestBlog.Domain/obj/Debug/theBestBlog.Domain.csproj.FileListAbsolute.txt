@@ -1,0 +1,15 @@
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\theBestBlog.Domain.dll.config
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\theBestBlog.Domain.dll
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\theBestBlog.Domain.pdb
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\EntityFramework.dll
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\EntityFramework.xml
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\obj\Debug\theBestBlog.Domain.dll
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\obj\Debug\theBestBlog.Domain.pdb
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Ninject.dll
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Ninject.Web.Common.dll
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Ninject.xml
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Ninject.Web.Common.xml
+c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Ninject.MVC.dll
+C:\Users\Den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\obj\Debug\theBestBlog.Domain.csprojResolveAssemblyReference.cache

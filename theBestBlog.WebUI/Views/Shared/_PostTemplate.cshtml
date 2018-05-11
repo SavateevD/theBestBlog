@@ -1,0 +1,33 @@
+﻿@model theBestBlog.Domain.Objects.Post
+
+<div class="card mb-4">
+    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+    <div class="card-body">
+        <h2 class="card-title">@Html.PostLink(Model)</h2>
+        <span>Category:</span>@Html.CategoryLink(Model.Category)
+        <span>Tags:</span>@TagHelper.Tags(Html, Model.Tags)
+        <p class="card-text">@Html.Raw(Model.ShortDescription)</p>
+       <a class="btn btn-primary" href="@Url.Action("Post", "Blog",
+        new
+        {
+            year = Model.PostedOn.Year,
+            month = Model.PostedOn.Month,
+            day = Model.PostedOn.Day,
+            title = Model.UrlSlug
+        })">Read more &rarr;</a> 
+    </div>
+    <div class="card-footer text-muted">
+        Posted on @Model.PostedOn.ToConfigLocalTime()
+    </div>
+</div>
+
+@*@Html.ActionLink("continue...", "post", "blog",
+        new
+        {
+            year = Model.PostedOn.Year,
+            month = Model.PostedOn.Month,
+            day = Model.PostedOn.Day,
+            title = Model.UrlSlug
+        },
+        new { @class = "btn btn-primary" }
+    )*@

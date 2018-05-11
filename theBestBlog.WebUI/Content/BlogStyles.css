@@ -1,0 +1,10 @@
+﻿body {
+    padding-top: 54px;
+    background-image: url('images/church.png');
+}
+
+@media (min-width: 992px) {
+    body {
+        padding-top: 56px;
+    }
+}

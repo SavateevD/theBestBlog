@@ -1,0 +1,18 @@
+﻿<div class="card my-4">
+    <h5 class="card-header">Search</h5>
+    <div class="card-body">
+        @using (Html.BeginForm(
+        "Search",           // action
+        "Blog",             // controller
+        FormMethod.Get,     // method
+        new { id = "search-form" })) // html attributes
+        {
+            <div class="input-group">
+                <input name="s" id="s" type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="submit">Go!</button>
+                </span>
+            </div>
+        }
+    </div>
+</div>
