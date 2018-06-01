@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,14 @@ namespace theBestBlog.Domain.Concrete
     {
         private EFDBContext context = new EFDBContext();
 
+        public IEnumerable<Post> GetAllPosts()
+        {
+            var posts = context.Posts
+                  .Include(p => p.Category).Include(p => p.Tags)
+                  .OrderByDescending(p => p.PostedOn)
+                  .ToList();
+            return posts;
+        }
         public IEnumerable<Post> Posts(int pageNo, int pageSize)
         {
             var posts = context.Posts
@@ -22,9 +31,13 @@ namespace theBestBlog.Domain.Concrete
                               .ToList();
             return posts;
         }
-        public int TotalPosts()
+        public int TotalPosts(bool checkIsPublished = true)
         {
-            int Count = context.Posts.Count();
+            // The method returns the total count of only published posts 
+            // but passing false to the method returns the count of all the posts
+            int Count = context.Posts
+                .Where(p => !checkIsPublished || p.Published == true)
+                .Count();
             return Count;
         }
 
@@ -53,7 +66,7 @@ namespace theBestBlog.Domain.Concrete
             return context.Categories
                         .FirstOrDefault(t => t.UrlSlug.Equals(categorySlug));
         }
-#endregion
+        #endregion
 
         #region PostsForTag
         public IEnumerable<Post> PostsForTag(string tagSlug, int pageNo, int pageSize)
@@ -112,10 +125,18 @@ namespace theBestBlog.Domain.Concrete
                                 .Single();
             return post;
         }
+        public Post PostById(int Id)
+        {
+            var post = context.Posts
+                                .Where(p => p.Id == Id)
+                                .Include(p => p.Category).Include(p => p.Tags)
+                                .FirstOrDefault();
+            return post;
+        }
 
         #endregion
 
-#region SideBars
+        #region SideBars
         public IEnumerable<Category> GetAllCategories()
         {
             return context.Categories.OrderBy(p => p.Name).ToList();
@@ -125,6 +146,156 @@ namespace theBestBlog.Domain.Concrete
             return context.Tags.OrderBy(p => p.Name).ToList();
         }
         #endregion
+
+        #region jqGrid
+        public IList<Post> Posts(int pageNo, int pageSize, string sortColumn,
+                                    bool sortByAscending)
+        {
+            IList<Post> posts;
+
+            switch (sortColumn)
+            {
+                case "Title":
+                    if (sortByAscending)
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderBy(p => p.Title)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                    }
+                    else
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderByDescending(p => p.Title)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                    }
+                    break;
+                case "Published":
+                    if (sortByAscending)
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                         .OrderBy(p => p.Published)
+                                         .Skip(pageNo * pageSize)
+                                         .Take(pageSize)
+                                         .ToList();
+                    }
+                    else
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderByDescending(p => p.Published)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                    }
+                    break;
+                case "PostedOn":
+                    if (sortByAscending)
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderBy(p => p.PostedOn)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                    }
+                    else
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderByDescending(p => p.PostedOn)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+
+                    }
+                    break;
+                case "Modified":
+                    if (sortByAscending)
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderBy(p => p.Modified)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                    }
+                    else
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderByDescending(p => p.Modified)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                    }
+                    break;
+                case "Category":
+                    if (sortByAscending)
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderBy(p => p.Category.Name)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                    }
+                    else
+                    {
+                        posts = context.Posts.Include(p => p.Category).Include(p => p.Tags)
+                                        .OrderByDescending(p => p.Category.Name)
+                                        .Skip(pageNo * pageSize)
+                                        .Take(pageSize)
+                                        .ToList();
+                    }
+                    break;
+                default:
+                    posts = context.Posts
+                                    .Where(p => p.Published)
+                                    .Include(p => p.Category).Include(p => p.Tags)
+                                    .OrderByDescending(p => p.PostedOn)
+                                    .Skip(pageNo * pageSize)
+                                    .Take(5)
+                                    .ToList();
+                    break;
+            }
+
+            return posts;
+        }
+
+        #endregion
+
+
+        public void AddOrUpdatePost(Post post)
+        {
+            if (post.Id == 0)
+            {
+                context.Posts.Add(post);
+                context.SaveChanges();
+            }
+            else
+            {
+                // context.Posts.AddOrUpdate(post); Entity.Migrations
+
+                //var entity = context.Posts.Find(post.Id);
+
+                var entity = context.Posts.Where(p => p.Id == post.Id).Include(p => p.Category).Include(p => p.Tags).First();
+                Category c = post.Category;
+                List<Tag> t = post.Tags.ToList();
+
+                context.Entry(entity).CurrentValues.SetValues(post);
+                entity.Category = c;
+                entity.Tags = t;
+
+                context.SaveChanges();
+            }
+
+
+        }
+
+        public void Delete(int id)
+        {
+            Post post = context.Posts.Where(p => p.Id == id).FirstOrDefault();
+            context.Posts.Remove(post);
+            context.SaveChanges();
+        }
 
     }
 

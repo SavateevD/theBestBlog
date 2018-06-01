@@ -1,0 +1,77 @@
+﻿@model theBestBlog.Domain.Objects.Post
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEdit", "Admin", FormMethod.Post,  new { onsubmit = "return SubmitForm(this)"} ))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.PostedOn)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ShortDescription, new { @class = "control-label" })<br />
+        @Html.TextAreaFor(model => model.ShortDescription, new { id = "customTextArea", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ShortDescription)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, new { @class = "control-label" })<br />
+        @Html.TextAreaFor(model => model.Description, new { id = "customTextArea", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Meta, new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.Meta, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Meta)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.UrlSlug, new { @class = "control-label" })<br />
+        @Html.EditorFor(model => model.UrlSlug, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.UrlSlug)
+    </div>
+    <div class="form-group form-inline">
+        @Html.LabelFor(model => model.Category, new { @class = "control-label mr-2", @for = "inlineFormCustomSelectPref" })
+        @Html.DropDownListFor(model => model.Category,
+        new SelectList(ViewBag.CatCollection, "Id", "Name", (Model.Category == null ? 1 : Model.Category.Id)),
+        new { @class = "form-control custom-select my-1 mr-sm-2", id = "inlineFormCustomSelectPref" })
+        @Html.ValidationMessageFor(model => model.Category)
+    </div>
+    <div class="form-check form-check-inline">
+        @foreach (var tag in ViewBag.TagCollection)
+        {
+            bool hasTag = false;
+            if (Model.Tags != null)
+            {
+                foreach (var mtag in Model.Tags)
+                {
+                    if (tag.Name == mtag.Name)
+                    {
+                        hasTag = true;
+                    }
+                }
+            }
+            @Html.CheckBox("tags", hasTag, new { @class = "form-check-input", id = "inlineCheckbox1", value = tag.Name as String })
+            <ul class="list-unstyled mb-0">
+                <li>
+                    <label class="form-check-label mr-2" for="inlineCheckbox1">@tag.Name</label>
+                </li>
+            </ul>
+        }
+    </div>
+    <div class="form-group my-3">
+        <div class="form-check">
+            @Html.CheckBoxFor(model => model.Published, new { @class = " form-check-input", id = "defaultCheck1" })
+            @Html.LabelFor(model => model.Published, "Published right now", new { @class = "control-label form-check-label", @for = "defaultCheck1" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type = "submit" value = "Submit" class="btn btn-primary" />
+        <input type="reset" value="Reset" class="btn" />
+    </div>
+}
+

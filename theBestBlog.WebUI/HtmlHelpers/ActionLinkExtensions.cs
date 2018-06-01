@@ -41,7 +41,7 @@ namespace theBestBlog.WebUI.HtmlHelpers
             return helper.ActionLink(tag.Name, "Tag", "Blog", new { tag = tag.UrlSlug },
                 new
                 {
-                    title = String.Format("See all posts in {0}", tag.Name)
+                    title = String.Format("See all posts in {0}", tag.Name), @class= "m-1 badge badge-primary rounded-0"
                 });
         }
     }

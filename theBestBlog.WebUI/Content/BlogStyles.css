@@ -1,10 +1,23 @@
 ﻿body {
     padding-top: 54px;
     background-image: url('images/church.png');
+    font-family: 'Nunito', sans-serif;
 }
+
 
 @media (min-width: 992px) {
     body {
         padding-top: 56px;
     }
+}
+
+#customTextArea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
 }

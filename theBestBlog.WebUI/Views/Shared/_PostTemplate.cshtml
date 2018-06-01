@@ -1,11 +1,14 @@
 ﻿@model theBestBlog.Domain.Objects.Post
 
-<div class="card mb-4">
-    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+<div class="card mb-4 rounded-0">
+    <img class="card-img-top rounded-0" src="http://placehold.it/800x300" alt="Card image cap">
     <div class="card-body">
         <h2 class="card-title">@Html.PostLink(Model)</h2>
-        <span>Category:</span>@Html.CategoryLink(Model.Category)
-        <span>Tags:</span>@TagHelper.Tags(Html, Model.Tags)
+        <div>Category: @Html.CategoryLink(Model.Category)</div>
+        @if (Model.Tags.Count > 0)
+        {
+            <div>Tags: @TagHelper.Tags(Html, Model.Tags)</div>
+        }
         <p class="card-text">@Html.Raw(Model.ShortDescription)</p>
        <a class="btn btn-primary" href="@Url.Action("Post", "Blog",
         new

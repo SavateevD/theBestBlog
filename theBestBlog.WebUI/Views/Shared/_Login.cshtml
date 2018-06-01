@@ -1,0 +1,141 @@
+﻿@model theBestBlog.WebUI.Models.LoginModel
+
+
+
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-0">
+ @using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { @class = "form-horizontal", onsubmit = "return SubmitLoginForm(this)" })) 
+    {
+
+        <div class="modal-header">
+            
+            <h2 class="modal-title ml-5" id="exampleModalLongTitle">Please Login</h2>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+            <div class="modal-body">
+                        @*<form class="form-horizontal" role="form" method="POST" action="/login">*@
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group has-danger">
+                                    @*<label class="sr-only" for="UserName">Your Name:</label>*@
+                                    @Html.LabelFor(m => m.UserName, new { @class = "sr-only" })
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon mt-2" style="width: 2.6rem"><i class="fas fa-user"></i></div>
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Admin", required = "", autofocus = "" })
+                                        @*<input type="text" name="UserName" class="form-control" id="UserName"
+                                            placeholder="Admin" required autofocus>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        @if (!ViewData.ModelState.IsValid)
+                                        {
+                                            <i class="fas fa-times mt-2"></i>
+                                            @Html.ValidationMessageFor(Model => Model.UserName)
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    @*<label class="sr-only" for="password">Password</label>*@
+                                    @Html.LabelFor(m => m.Password, new { @class = "sr-only" })
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon mt-2" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Admin", type = "password", required = "" })
+                                        @*<input type="password" name="password" class="form-control" id="password"
+                                            placeholder="Password" required>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-control-feedback">
+                                    <span class="text-danger align-middle">
+                                        @if (!ViewData.ModelState.IsValid)
+                                        {
+                                            <i class="fas fa-times mt-2"></i>
+
+                                            @Html.ValidationMessageFor(Model => Model.Password)
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-md-9 text-center" style="padding-top: .35rem">
+                                <div class="form-check mb-2 mr-sm-2 mb-sm-0">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" name="remember"
+                                               type="checkbox">
+                                        <span style="padding-bottom: .15rem">Remember me</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 1rem">
+                            
+                            <div class="col-md-9">
+                                @Html.Hidden("ReturnUrl")
+                                @Html.AntiForgeryToken()                                
+                            </div>
+                        </div>
+                <div class="row" id="error-text" style="padding-top: 1rem">
+
+                </div>
+                    @*</form>*@
+
+
+
+
+                </div>
+            <div class="modal-footer justify-content-center">
+                <a class="btn btn-link" href="/password/reset">Forgot Your Password?</a>
+                <button type="submit" class="btn btn-success"><i class="fas fa-sign-in-alt"></i> Login</button>
+
+            </div>
+}
+        </div>
+    </div>
+</div>
+
+<script>
+        function SubmitLoginForm(form) {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Login",
+                data: $(form).serialize(),
+                success: function (data) {
+                    if (!data.success) {
+                        var div = $('#error-text');
+                        div.html(data.message);
+
+
+                        //$.notify(data.message, {
+                        //    globalPosition: "top center",
+                        //    className: "error",
+                        //    style: "bootstrap"
+                        //})
+
+                    }
+                }
+            });
+            return false;
+        }
+        
+
+
+</script>

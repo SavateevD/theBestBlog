@@ -31,6 +31,43 @@ namespace theBestBlog.WebUI
             new { controller = "Blog", action = "Tag" }
             );
 
+            #region AdminRoutes
+
+            routes.MapRoute(
+            "Login",
+            "Login",
+            new { controller = "Admin", action = "Login" }
+            );
+
+            routes.MapRoute(
+            "Logout",
+            "Logout",
+             new { controller = "Admin", action = "Logout" }
+            );
+
+            routes.MapRoute(
+            "Manage",
+            "Manage",
+            new { controller = "Admin", action = "Manage" }
+            );
+
+
+
+            routes.MapRoute(
+                "AdminAction",
+                "Admin/{action}",
+                new { controller = "Admin", action = "Login" }
+            );
+
+
+            routes.MapRoute(
+                "AdminAction2",
+                "Admin/{action}/{id}",
+                new { controller = "Admin", action = "AddOrEdit", id = UrlParameter.Optional }
+            );
+            #endregion
+
+            //default route
             routes.MapRoute(
                 name: "Default",
                 url: "{action}",

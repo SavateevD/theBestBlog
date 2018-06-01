@@ -13,3 +13,5 @@ c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domai
 c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Ninject.Web.Common.xml
 c:\users\den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Ninject.MVC.dll
 C:\Users\Den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\obj\Debug\theBestBlog.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Den\documents\visual studio 2017\Projects\theBestBlog\theBestBlog.Domain\bin\Debug\Newtonsoft.Json.xml

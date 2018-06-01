@@ -9,8 +9,9 @@ namespace theBestBlog.Domain
 {
     public interface IBlogRepository
     {
+        IEnumerable<Post> GetAllPosts();
         IEnumerable<Post> Posts(int pageNo, int pageSize);
-        int TotalPosts();
+        int TotalPosts(bool checkIsPublished = true);
         IEnumerable<Post> PostsForCategory(string categorySlug, int pageNo, int pageSize);
         int TotalPostsForCategory(string categorySlug);
         Category Category(string categorySlug);
@@ -20,8 +21,17 @@ namespace theBestBlog.Domain
         IEnumerable<Post> PostsForSearch(string search, int pageNo, int pageSize);
         int TotalPostsForSearch(string search);
         Post Post(int year, int month, string titleSlug);
+        Post PostById(int Id);
         IEnumerable<Category> GetAllCategories();
         IEnumerable<Tag> GetAllTags();
 
+        #region jqGrid
+        IList<Post> Posts(int pageNo, int pageSize, string sortColumn,
+                            bool sortByAscending);
+
+        #endregion
+
+        void AddOrUpdatePost(Post post);
+        void Delete(int id);
     }
 }

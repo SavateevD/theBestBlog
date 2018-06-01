@@ -1,11 +1,11 @@
 ﻿@model IList<theBestBlog.Domain.Objects.Post>
 
 
-<div class="card my-4">
-    <h5 class="card-header">Latest Posts</h5>
+<div class="card my-4 sticky">
+    <h5 class="card-header text-center">Latest Posts</h5>
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col">
                 @if (Model.Count > 0)
                 {
                     <ul class="list-unstyled mb-0">

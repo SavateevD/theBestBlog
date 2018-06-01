@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using theBestBlog.Domain.Concrete;
 
 namespace theBestBlog.WebUI
 {
@@ -11,6 +13,7 @@ namespace theBestBlog.WebUI
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<EFDBContext>(null);
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Ninject;
 using theBestBlog.Domain;
 using theBestBlog.Domain.Concrete;
+using theBestBlog.WebUI.Providers;
 
 namespace theBestBlog.WebUI.Infrastructure
 {
@@ -30,6 +31,7 @@ namespace theBestBlog.WebUI.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IBlogRepository>().To<BlogRepository>();
+            kernel.Bind<IAuthProvider>().To<AuthProvider>();
         }
     }
 }

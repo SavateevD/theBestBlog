@@ -10,6 +10,8 @@
 
     <title>@ViewBag.Title</title>
 
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Bootstrap core CSS -->
 
     <link href="~/Content/bootstrap4/css/bootstrap.min.css" rel="stylesheet" />
@@ -20,71 +22,60 @@
 </head>
 
 <body>
-
+    <!--Header-->
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top border-bottom-2 border">
         <div class="container">
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">BestBlog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">
-                            Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                        @Html.ActionLink("Posts", "Posts", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">@Html.ActionLink("Posts", "Posts")</a>
+                        <a class="nav-link" href="#">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">@Html.ActionLink("Contact", "Contact")</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">@Html.ActionLink("About Me", "AboutMe")</a>
+                        <a class="nav-link" href="#">About Me</a>
                     </li>
                 </ul>
+                <span class="navbar-text">
+                    <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModalCenter">Login</a>
+                </span>
             </div>
         </div>
     </nav>
-
     <!-- Page Content -->
     <div class="container">
-
+        <div class="row" style="height:28px"></div>
         <div class="row">
-
             <!-- Blog Entries Column -->
             <div class="col-md-8">
-
-                <h1 class="my-4">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
-
                 @RenderBody()
                 <!-- Blog Post -->
                 <!-- Pagination -->
-                
-
             </div>
-
             <!-- Sidebar Widgets Column -->
             <div class="col-md-4">
-
-                <!-- Search Widget -->
+                <div class="row justify-content-center" style="height:30px">
+                    <h3>
+                        <a href="#" class="text-dark"><i class="fab fa-windows"></i></a>
+                        <a href="#" class="text-dark"><i class="fab fa-twitter-square"></i></a>
+                        <a href="#" class="text-dark"><i class="fab fa-facebook"></i></a>
+                        <a href="https://github.com/SavateevD?tab=repositories" class="text-dark"><i class="fab fa-github"></i></a>
+                    </h3>
+                </div>
+                <!-- Side Widgets -->
                 @Html.Partial("_Search")
                 @Html.Action("Sidebars")
 
-                <!-- Categories Widget -->
-
-
-                <!-- Side Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
+                    <h5 class="card-header text-center">Side Widget</h5>
                     <div class="card-body">
-                        You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                        todo add some widget here
                     </div>
                 </div>
 
@@ -102,7 +93,7 @@
         </div>
         <!-- /.container -->
     </footer>
-
+    @Html.Action("Login", "Admin")
     <!-- Bootstrap core JavaScript -->
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Content/bootstrap4/js/bootstrap.bundle.min.js"></script>
@@ -115,6 +106,7 @@
             });
         });
     </script>
+    <script src="~/Scripts/fontAwesome/fontawesome-all.min.js"></script>
 </body>
 
 </html>
